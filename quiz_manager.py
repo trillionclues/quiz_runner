@@ -48,31 +48,33 @@ def play_quiz(topic):
         quiz.add_question("What is the chemical symbol for bromine?", ["A. Cl", "B. Br", "C. I", "D. F"], "B")
         # Add more science questions
 
+
     users = []
     while True:
         name, score = quiz.run_quiz()
-        try:
+
+        # Check if the score is a non-negative integer
+        if isinstance(score, str) and score.isdigit():
             score = int(score)
-        except ValueError:
+        elif not isinstance(score, (int, float)):
             score = 0
+        
+
         users.append((name, score))
-        play_again = input("Would you like to play again? (yes/no) ")
+        more_users = input("Are there any other users who want to take the quiz? (yes/no) ")
 
-        # # Exit the program if the player selects "no"
-        if play_again.lower() != "yes":
-            sys.exit(0)
+        # If no more user to play and the player selects "no"
+        if more_users.lower() != "yes":
+            break
 
-    print("\nFinal Scores:")
-    users.sort(key=lambda x: x[1], reverse=True)
-    for user in users:
-        print("Name:", user[0])
-        print("Score:", user[1])
+    print("\nQuiz Results:")
+    highest_score = max(users, key=lambda x: x[1])
+    total_score = sum(score for _, score in users)  # Accumulate the score
+    num_players = len(users)  # Get the number of players
+    print("Highest Score:", highest_score[1])
+    print("Total Players:", num_players)
+    print("Average Score:", total_score / num_players)
 
-    total_users = len(users)
-    total_score = sum(score for _, score in users)
-    average_score = total_score / total_users
-    print("Total users:", total_users)
-    print("Average score:", average_score)
     
     # Display all questions and correct answers
     print("\nQuestions and Correct Answers:")
