@@ -64,3 +64,23 @@ class Quiz:
             print("Correct answer:", self.correct_answers[i])
 
         return score, name
+
+
+# UNIT TESTS
+### Test adding a question:
+# quiz = Quiz("History")
+# quiz.add_question("Who was the first president of the United States?",
+# ["A. George Washington", "B. Abraham Lincoln", "C. Thomas Jefferson",
+# "D. John Adams"], "A")
+# assert len(quiz.questions) == 1
+# assert len(quiz.answers) == 1
+# assert len(quiz.correct_answers) == 1
+
+# ## Test running the quiz with correct answers and skipping a question:
+# quiz = Quiz("Math")
+# quiz.add_question("What is 1 + 1?", ["A. 1", "B. 2", "C. 3", "D. 4"], "B")
+# quiz.add_question("What is 2 + 2?", ["A. 2", "B. 4", "C. 6", "D. 8"], "B")
+# score, name = quiz.run_quiz()
+# assert score == 2
+# assert score == 0
+# assert name != ""
